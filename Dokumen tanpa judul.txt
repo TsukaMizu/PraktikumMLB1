@@ -1,0 +1,144 @@
+﻿Perencanaan Detail Website Manajemen Aset
+1. Pendahuluan 
+Website manajemen aset ini dirancang untuk membantu Divisi Sistem Informasi (SI) dalam mengelola aset perusahaan secara efisien. Proyek ini mencakup fitur utama seperti manajemen aset, alokasi aset, laporan tugas, manajemen kategori, stok barang, dan pengelolaan pengguna. Website ini juga dilengkapi dengan fitur soft delete dan log aktivitas untuk memantau tindakan pengguna.
+________________
+
+
+2. Fitur Utama
+2.1 Manajemen Aset
+* Deskripsi: Mengelola data aset seperti komputer, laptop, printer, dan scanner.
+* Fitur:
+   * Tambah, edit, hapus aset.
+   * Pencatatan riwayat pemakai aset (nama, tanggal pengambilan, tanggal pengembalian).
+   * Update status aset (baik, rusak, hilang, unknown).
+   * Soft delete untuk mengarsipkan aset.
+2.2 Alokasi Aset
+* Deskripsi: Mencatat dan memantau distribusi aset kepada karyawan.
+* Fitur:
+   * Input data alokasi (pegawai, jabatan, lokasi).
+   * Pencatatan barang yang dipinjam (laptop, PC, dll.).
+   * Status barang (dipinjam, kembali).
+2.3 Laporan Tugas
+* Deskripsi: Membantu pengguna dengan role Helper dalam melaporkan tugas seperti perbaikan alat dan helpdesk.
+* Fitur:
+   * Formulir laporan tugas.
+   * Riwayat laporan berdasarkan tanggal.
+2.4 Manajemen Kategori
+* Deskripsi: Mengelola kategori barang seperti laptop, PC, printer, dan scanner.
+* Fitur:
+   * Tambah, edit, hapus kategori.
+   * Penentuan jumlah maksimum barang per kategori.
+2.5 Manajemen Stok
+* Deskripsi: Mengelola stok barang yang tersedia.
+* Fitur:
+   * Catatan barang masuk (disimpan di gudang).
+   * Catatan barang keluar (dipinjam karyawan).
+   * Notifikasi stok minimum.
+2.6 Manajemen Pengguna
+* Deskripsi: Dikelola oleh Asisten Manager (Asman), memungkinkan pembuatan dan pengaturan akun pengguna berdasarkan role.
+* Fitur:
+   * Tambah, edit, hapus pengguna.
+   * Penyesuaian role (Helper, Officer, Asman, Manager).
+   * Notifikasi email saat akun baru dibuat.
+2.7 Soft Delete dan Log Aktivitas
+* Soft Delete:
+   * Arsipkan data aset, pengguna, atau barang tanpa menghapus permanen.
+   * Data dapat dipulihkan sewaktu-waktu.
+* Log Aktivitas:
+   * Mencatat tindakan pengguna (tambah, edit, hapus, login).
+   * Tampilkan log aktivitas di frontend dengan filter waktu dan pengguna.
+________________
+
+
+3. Struktur Database
+1. Tabel Aset:
+
+   * id, nip, computer_name, merk, warna, spesifikasi, tahun_inventaris, os, office, office_365, email_365, serial_number, no_at, tanggal_diterima, tanggal_kembali, status, wellness, riwayat_perbaikan, riwayat_pemakai, pr_awal, pr_line, judul_pr, po_awal, tanggal_datang_koperasi, tanggal_kembali_koperasi, catatan.
+   2. Tabel Alokasi Aset:
+
+      * id, nip, laptop_koperasi, laptop_ip, pc_koperasi, pc_ip.
+      3. Tabel Kategori:
+
+         * id, nama 
+         4. Tabel Stok:
+
+            * id, nama_barang, kategori_id, jumlah_masuk, jumlah_keluar, status.
+            5. Tabel Karyawan:
+
+               * id, nip, nama, email, password, divisi, jabatan, lokasi_gedung, lokasi_ruang, group_asman, .
+               6. Tabel Log Aktivitas:
+               * id, user_id, aksi, timestamp, detail.
+               7. Tabel user
+               * id, email,password,timestamp
+               8.  Tabel roles
+               * id,nama,timestamp
+               9.  Tabel user_role
+               * id, user_id, role_id, timestamp
+________________
+
+
+4. Role-Based Access Control (RBAC)
+               1. Helper:
+               * Melaporkan tugas (perbaikan alat, helpdesk).
+               * Melihat riwayat laporan.
+               2. Officer:
+               * Mengelola aset, alokasi, kategori, stok.
+               * Melihat data karyawan.
+               3. Asman:
+               * Akses penuh ke semua fitur (termasuk user management).
+               * Melihat log aktivitas pengguna.
+               4. Manager:
+               * Sama seperti Asman (akses penuh).
+________________
+
+
+5. Teknologi yang Digunakan
+               * Backend: Laravel 11.
+               * Frontend: React.js.
+               * Database: MySQL.
+               * Authentication: Laravel Breeze/Sanctum.
+               * Library Tambahan:
+               * Spatie Activity Log untuk log aktivitas.
+               * Tailwind CSS/Bootstrap untuk UI/UX.
+________________
+
+
+6. Timeline Pengembangan
+Tanggal
+	Kegiatan
+	Output
+	16 Januari
+	Setup project dan konfigurasi database.
+	Struktur project siap.
+	17 Januari
+	Pembuatan migration tabel.
+	Database siap.
+	18 Januari
+	CRUD backend untuk fitur utama.
+	API backend selesai.
+	19 Januari
+	Implementasi autentikasi dan middleware RBAC.
+	Sistem login dan pengaturan akses selesai.
+	20 Januari
+	Desain dan implementasi UI/UX.
+	Tampilan UI siap.
+	21 Januari
+	Fitur soft delete dan log aktivitas.
+	Soft delete dan log aktivitas selesai.
+	22 Januari
+	Fitur user management oleh Asman.
+	User management selesai.
+	23 Januari
+	Pengujian dan debugging.
+	Semua bug diperbaiki.
+	24 Januari
+	Deployment di server lokal.
+	Website siap digunakan.
+	25 Januari
+	Dokumentasi dan presentasi hasil akhir.
+	Dokumentasi selesai.
+	________________
+
+
+7. Penutup 
+Website manajemen aset ini dirancang untuk meningkatkan efisiensi Divisi SI dalam mengelola aset perusahaan, memberikan transparansi, dan mempermudah pengambilan keputusan. Dengan fitur-fitur yang lengkap dan desain yang terstruktur, sistem ini diharapkan menjadi solusi yang efektif dalam manajemen aset perusahaan.
